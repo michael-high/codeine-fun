@@ -5,10 +5,10 @@ def MaxSteps(n):
             tmp=i
     return tmp
 def tri(x):
-    sum=0
+    suM=0
     for i in range(1,x+1):
-        sum += i
-    return sum
+        suM += i
+    return suM
     #return x + tri(x-1)
 #Iteration!!!!!!!!
 
@@ -49,8 +49,30 @@ def solution1(n):
                     break
         else:
             break
+    for i in range(1,n):
+        m=n-i
+        if i<m:
+            for j in range(i+1,m):
+                l=m-j
+                if j<l-j:
+                    for k in range(j+1,l):
+                        o=l-k
+                        if k<o-k:
+                            for h in range(k+1,o):
+                                p=o-h
+                                if h<p-h:
+                                    lst.append((i,j,k,h,p-h))
+                                    counter+=1
+                                else:
+                                    break
+                        else:
+                            break
+                else:
+                    break
+        else:
+            break
     return((lst,counter))
-print(solution1(17))
+print(solution1(15))
 print("")
 
 #recursion
@@ -58,31 +80,46 @@ print("")
 def solution(n):
     M=MaxSteps(n)
     count=[]
+    # total=0
     for i in range(2, M+1):
+        # total+=recursolution(n,i,0)
         sol=recursolution(n,i,0)
         for each in sol:
             count.append(each)
-    return (count, len(count))
+    return (count, len(count)) #total
 
 def recursolution(size,Max,step):
+    # count=0
     step+=1
     if Max==2:
         lst=[]
         for i in range (step,size+1):
             if i<size-i:
                 lst.append((i,size-i))
+                # count+=1
             else:
                 break
-        return lst
+        return lst  #count
     else:
         out=[]
         for i in range(step,Max+1):
-            tmp=recursolution(size-i,Max-i+1,i)
+            tmp=recursolution(size-i,Max-1,i)
             for each in tmp:
                 out.append((i,each))
         return out
 
-print(solution(17))
+print(solution(15))
+
+# else:
+#         out=[]
+#         for j in range(3,Max):    
+#             for i in range(step,Max+1):
+#                 tmp=recursolution(size-i,j-1,i)
+#                 for each in tmp:
+#                     out.append((i,each))
+#         # if step>Max:
+#         #     out.append((step,step+1,size-step-1))
+#         return out
 
 
 # else:
@@ -99,3 +136,13 @@ print(solution(17))
 #         for each in tmp:
 #             out.append((step,each))
 #         return out
+
+# else:
+#         out=[]
+#         for j in range(3,Max):    
+#             for i in range(step,Max+1):
+#                 # count+=recursolution(size-i,j-1,i)
+#                 tmp=recursolution(size-i,j-1,i)
+#                 for each in tmp:
+#                     out.append((i,each))
+#         return  out #count
