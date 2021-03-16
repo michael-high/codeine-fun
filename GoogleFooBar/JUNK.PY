@@ -1,3 +1,4 @@
+import time
 def greeting():
     print("Hi, how are you")
 def Conversation(sentence):
@@ -43,7 +44,11 @@ def begin():
     Ask me something about Wabash!
     """)
     Conversation(start)
-begin()
+# begin()
 
-
-
+def clock():
+    while True:
+        it=time.ctime()
+        print(it)
+        time.sleep(1)
+clock()
