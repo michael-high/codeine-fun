@@ -146,3 +146,6 @@ print(solution(15))
 #                 for each in tmp:
 #                     out.append((i,each))
 #         return  out #count
+
+lst2=[3,2,1]
+print(len(lst2))
