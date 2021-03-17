@@ -17,21 +17,23 @@ Memo=dict()
 def solution(n):
     # if n in Results:
     #     return Results[n]
+    if n==3:
+        return 1
     count=0
-    for y in range(1,n):
+    for y in range(1,n//2):
         #print(Memo)
         if (n,y) in Memo:
             count+= Memo[(n,y)]
         else:
             Memo[(n,y)]=CountStairCases(n,y)
             count+=Memo[(n,y)]
-    print(Memo)
+    # print(Memo)
     return count-1
     # Results[n]=count-1    
     # return Results[n]
 
 def CountStairCases(X,Y):
-    print(Memo)
+    # print(Memo)
     if Y<=0 or X<=0:
         return 0
     elif X==Y and X==1:
@@ -39,13 +41,13 @@ def CountStairCases(X,Y):
     elif X==Y and X>1:
         return 0
     else:
-        if Memo[(X-Y,Y)]:
-            if Memo[(X-Y,Y-1)]:
+        if (X-Y,Y) in Memo:
+            if (X-Y,Y-1) in Memo:
                 return Memo[(X-Y,Y)]+Memo[(X-Y,Y-1)]
             else:
                 Memo[(X-Y,Y-1)]=CountStairCases(X-Y,Y-1)
                 return Memo[(X-Y,Y)]+Memo[(X-Y,Y-1)]
-        elif Memo[(X-Y,Y-1)]:
+        elif (X-Y,Y-1) in Memo:
             Memo[(X-Y,Y)]=CountStairCases(X-Y,Y)
             return Memo[(X-Y,Y)]+Memo[(X-Y,Y-1)]
         else:
@@ -57,12 +59,12 @@ def solution1(n):
     count=0
     for y in range(1,n):
         # print("this is the end",y)
-        count+=CountStairCases(n,y)
+        count+=CountStairCases1(n,y)
         
     return count-1
 
 @lru_cache
-def CountStairCases(X,Y):
+def CountStairCases1(X,Y):
     # print("recursion:",X,Y)
     if Y<=0 or X<=0:
         return 0
@@ -73,12 +75,52 @@ def CountStairCases(X,Y):
         # print("this is bad case")
         return 0
     else:
-        return CountStairCases(X-Y,Y) + CountStairCases(X-Y,Y-1)
+        return CountStairCases1(X-Y,Y) + CountStairCases1(X-Y,Y-1)
 start=time.time()
-print(solution(15))
+print(solution(2000))
 end=time.time()
 print("elapsed=",end-start)
+
 # start=time.time()
-# print(solution1(200))
+# print(solution1(3))
 # end=time.time()
 # print("elapsed=",end-start)
+
+# def solution(n):
+#     # if n in Results:
+#     #     return Results[n]
+#     count=0
+#     for y in range(1,n//2+n//3):
+#         #print(Memo)
+#         if (n,y) in Memo:
+#             count+= Memo[(n,y)]
+#         else:
+#             Memo[(n,y)]=CountStairCases(n,y)
+#             count+=Memo[(n,y)]
+#     # print(Memo)
+#     return count-1
+#     # Results[n]=count-1    
+#     # return Results[n]
+
+# def CountStairCases(X,Y):
+#     # print(Memo)
+#     if Y<=0 or X<=0:
+#         return 0
+#     elif X==Y and X==1:
+#         return 1
+#     elif X==Y and X>1:
+#         return 0
+#     else:
+#         if Memo[(X-Y,Y)]:
+#             if Memo[(X-Y,Y-1)]:
+#                 return Memo[(X-Y,Y)]+Memo[(X-Y,Y-1)]
+#             else:
+#                 Memo[(X-Y,Y-1)]=CountStairCases(X-Y,Y-1)
+#                 return Memo[(X-Y,Y)]+Memo[(X-Y,Y-1)]
+#         elif Memo[(X-Y,Y-1)]:
+#             Memo[(X-Y,Y)]=CountStairCases(X-Y,Y)
+#             return Memo[(X-Y,Y)]+Memo[(X-Y,Y-1)]
+#         else:
+#             Memo[(X-Y,Y)]=CountStairCases(X-Y,Y)
+#             Memo[(X-Y,Y-1)]=CountStairCases(X-Y,Y-1)
+#             return Memo[(X-Y,Y)]+Memo[(X-Y,Y-1)]
