@@ -1,9 +1,14 @@
+import time
 def greeting():
     print("Hi, how are you")
 def Conversation(sentence):
-    sentence1=str(sentence)
-    if sentence1.__contains__("hello")==True:
+    
+    if sentence.__contains__("hello")==True:
         greeting()
+    
+    
+    
+    
     keepgoing=input("""
     do you want continue? [y] [n]
     """)
@@ -39,5 +44,11 @@ def begin():
     Ask me something about Wabash!
     """)
     Conversation(start)
+# begin()
 
-begin()
+def clock():
+    while True:
+        it=time.ctime()
+        print(it)
+        time.sleep(1)
+clock()
